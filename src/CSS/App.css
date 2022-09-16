@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-6xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  p {
+    @apply text-base;
+  }
+  label {
+    @apply text-base;
+  }
+  input {
+    @apply text-base;
+  }
+}
