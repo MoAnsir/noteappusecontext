@@ -1,10 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
+import { AppContext } from "../JS/AppContext";
 import NoteDesc from "./NoteDesc";
 import NoteContent from "./NoteContent";
 import NoteTags from "./NoteTags";
 
-const EditModal = ({ isOpen, setIsOpen, noteId, noteState, setNoteState }) => {
+const EditModal = ({ isOpen, setIsOpen, noteId }) => {
+  const { noteState, setNoteState } = useContext(AppContext);
   const [desc, setDesc] = useState("");
   const [note, setNote] = useState("");
   const [tags, setTags] = useState("");
@@ -32,7 +34,12 @@ const EditModal = ({ isOpen, setIsOpen, noteId, noteState, setNoteState }) => {
         <Dialog
           as="div"
           className="relative z-10"
-          onClose={() => setIsOpen(!isOpen)}
+          onClose={() => {
+            setIsOpen(!isOpen);
+            setDesc("");
+            setNote("");
+            setTags("");
+          }}
         >
           <Transition.Child
             as={Fragment}
