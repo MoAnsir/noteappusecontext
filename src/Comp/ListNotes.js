@@ -1,11 +1,15 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../JS/AppContext";
 import EditModal from "./EditModal";
+import ShowModal from "./ShowModal";
 
 const ListNote = () => {
   const { noteState, setNoteState } = useContext(AppContext);
-  let [isOpen, setIsOpen] = useState(false);
+  let [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  let [showModalIsOpen, setShowModalIsOpen] = useState(false);
   const [noteId, setNoteId] = useState();
+  const [showNoteData, setShowNoteData] = useState();
+  const [editNoteData, setEditNoteData] = useState();
 
   const handleDelete = (id) => {
     const removeNoteToDelete = noteState.filter((value) => {
@@ -15,8 +19,20 @@ const ListNote = () => {
   };
 
   const handleEdit = (id) => {
+    const noteToEdit = noteState.filter((value) => {
+      return value.id === id;
+    });
+    setEditNoteData(noteToEdit);
     setNoteId(id);
-    setIsOpen(!isOpen);
+    setEditModalIsOpen(!editModalIsOpen);
+  };
+
+  const handleShowModal = (id) => {
+    const noteToShow = noteState.filter((value) => {
+      return value.id === id;
+    });
+    setShowNoteData(noteToShow);
+    setShowModalIsOpen(!showModalIsOpen);
   };
 
   return (
@@ -26,9 +42,14 @@ const ListNote = () => {
         {noteState.length
           ? noteState.map((note, index) => (
               <li key={note.id}>
-                <p>description: {note.desc}</p>
-                <p>content: {note.note}</p>
-                <p>tags: {note.tags}</p>
+                <div
+                  className="note-content"
+                  onClick={() => handleShowModal(note.id)}
+                >
+                  <p>description: {note.desc}</p>
+                  <p>content: {note.note}</p>
+                  <p>tags: {note.tags}</p>
+                </div>
                 <button type="button" onClick={() => handleEdit(note.id)}>
                   Edit
                 </button>
@@ -39,13 +60,15 @@ const ListNote = () => {
             ))
           : null}
       </ul>
-
+      <ShowModal
+        isOpen={showModalIsOpen}
+        setIsOpen={setShowModalIsOpen}
+        showNoteData={showNoteData}
+      />
       <EditModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        isOpen={editModalIsOpen}
+        setIsOpen={setEditModalIsOpen}
         noteId={noteId}
-        noteState={noteState}
-        setNoteState={setNoteState}
       />
     </div>
   );
