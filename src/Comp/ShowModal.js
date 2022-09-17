@@ -2,10 +2,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 const ShowModal = ({ isOpen, setIsOpen, showNoteData }) => {
-  console.log(
-    "🚀 ~ file: showModal.js ~ line 5 ~ ShowModal ~ showNoteData",
-    showNoteData
-  );
   return (
     <div>
       {!showNoteData ? null : (
