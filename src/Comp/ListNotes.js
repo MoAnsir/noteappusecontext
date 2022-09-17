@@ -1,9 +1,23 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../JS/AppContext";
-import { v4 as uuidv4 } from "uuid";
+import EditModal from "./EditModal";
 
 const ListNote = () => {
   const { noteState, setNoteState } = useContext(AppContext);
+  let [isOpen, setIsOpen] = useState(false);
+  const [noteId, setNoteId] = useState();
+
+  const handleDelete = (id) => {
+    const removeNoteToDelete = noteState.filter((value) => {
+      return value.id !== id;
+    });
+    setNoteState(removeNoteToDelete);
+  };
+
+  const handleEdit = (id) => {
+    setNoteId(id);
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div>
@@ -15,10 +29,24 @@ const ListNote = () => {
                 <p>description: {note.desc}</p>
                 <p>content: {note.note}</p>
                 <p>tags: {note.tags}</p>
+                <button type="button" onClick={() => handleEdit(note.id)}>
+                  Edit
+                </button>
+                <button type="button" onClick={() => handleDelete(note.id)}>
+                  Delete
+                </button>
               </li>
             ))
           : null}
       </ul>
+
+      <EditModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        noteId={noteId}
+        noteState={noteState}
+        setNoteState={setNoteState}
+      />
     </div>
   );
 };

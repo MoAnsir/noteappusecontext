@@ -1,31 +1,39 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import NoteDesc from "./NoteDesc";
+import NoteContent from "./NoteContent";
+import NoteTags from "./NoteTags";
 
-export default function MyModal() {
-  let [isOpen, setIsOpen] = useState(true);
+const EditModal = ({ isOpen, setIsOpen, noteId, noteState, setNoteState }) => {
+  const [desc, setDesc] = useState("");
+  const [note, setNote] = useState("");
+  const [tags, setTags] = useState("");
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  const handleSave = (e) => {
+    e.preventDefault();
 
-  function openModal() {
-    setIsOpen(true);
-  }
+    const updatedState = noteState.map((obj) => {
+      if (obj.id === noteId) {
+        return { ...obj, desc, note, tags };
+      }
+      return obj;
+    });
+
+    setNoteState(updatedState);
+    setDesc("");
+    setNote("");
+    setTags("");
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <>
-      <div className="fixed inset-0 flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Open dialog
-        </button>
-      </div>
-
+    <div>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => setIsOpen(!isOpen)}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -54,22 +62,38 @@ export default function MyModal() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    Edit Note
                   </Dialog.Title>
-                  <div className="mt-2">
+
+                  <div className="modal-content mt-2">
                     <p className="text-sm text-gray-500">
                       Your payment has been successfully submitted. We’ve sent
                       you an email with all of the details of your order.
                     </p>
+                    <NoteDesc desc={desc} setDesc={setDesc} />
+                    <NoteContent note={note} setNote={setNote} />
+                    <NoteTags tags={tags} setTags={setTags} />
                   </div>
 
-                  <div className="mt-4">
+                  <div className="modal-footer mt-4 float-right">
+                    <button
+                      type="button"
+                      className="mr-4 inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                      onClick={() => {
+                        setIsOpen(!isOpen);
+                        setDesc("");
+                        setNote("");
+                        setTags("");
+                      }}
+                    >
+                      Close
+                    </button>
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
+                      onClick={(e) => handleSave(e)}
                     >
-                      Got it, thanks!
+                      Save
                     </button>
                   </div>
                 </Dialog.Panel>
@@ -78,6 +102,8 @@ export default function MyModal() {
           </div>
         </Dialog>
       </Transition>
-    </>
+    </div>
   );
-}
+};
+
+export default EditModal;
