@@ -4,6 +4,11 @@ import { initialData, AppContext } from "./JS/AppContext";
 import { useState, useEffect } from "react";
 import { get, set } from "idb-keyval";
 import "./CSS/App.css";
+// TODO:
+// add local storage
+// do jest tests
+// do cypress tests
+// fix design - cards for the notes
 
 const App = () => {
   const [noteState, setNoteState] = useState();
@@ -15,7 +20,8 @@ const App = () => {
           Note App
         </h1>
         <AddNote />
-        {noteState ? <ListNotes /> : "No notes"}
+        {/* {noteState ? <ListNotes /> : "No notes"}*/}
+        <ListNotes />
       </div>
     </AppContext.Provider>
   );

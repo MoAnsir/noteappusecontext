@@ -36,41 +36,47 @@ const ListNote = () => {
   };
 
   return (
-    <div>
-      <h1>List Note</h1>
-      <ul>
-        {noteState.length
-          ? noteState.map((note, index) => (
-              <li key={note.id}>
-                <div
-                  className="note-content"
-                  onClick={() => handleShowModal(note.id)}
-                >
-                  <p>description: {note.desc}</p>
-                  <p>content: {note.note}</p>
-                  <p>tags: {note.tags}</p>
-                </div>
-                <button type="button" onClick={() => handleEdit(note.id)}>
-                  Edit
-                </button>
-                <button type="button" onClick={() => handleDelete(note.id)}>
-                  Delete
-                </button>
-              </li>
-            ))
-          : null}
-      </ul>
-      <ShowModal
-        isOpen={showModalIsOpen}
-        setIsOpen={setShowModalIsOpen}
-        showNoteData={showNoteData}
-      />
-      <EditModal
-        isOpen={editModalIsOpen}
-        setIsOpen={setEditModalIsOpen}
-        noteId={noteId}
-      />
-    </div>
+    <>
+      {!noteState ? (
+        <p>No Note's</p>
+      ) : (
+        <div className="mt-10">
+          <h1 className="text-center">List Note</h1>
+          <ul className="flex">
+            {noteState.length
+              ? noteState.map((note, index) => (
+                  <li key={note.id} className="w-1/4">
+                    <div
+                      className="note-content"
+                      onClick={() => handleShowModal(note.id)}
+                    >
+                      <p>description: {note.desc}</p>
+                      <p>content: {note.note}</p>
+                      <p>tags: {note.tags}</p>
+                    </div>
+                    <button type="button" onClick={() => handleEdit(note.id)}>
+                      Edit
+                    </button>
+                    <button type="button" onClick={() => handleDelete(note.id)}>
+                      Delete
+                    </button>
+                  </li>
+                ))
+              : null}
+          </ul>
+          <ShowModal
+            isOpen={showModalIsOpen}
+            setIsOpen={setShowModalIsOpen}
+            showNoteData={showNoteData}
+          />
+          <EditModal
+            isOpen={editModalIsOpen}
+            setIsOpen={setEditModalIsOpen}
+            noteId={noteId}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
