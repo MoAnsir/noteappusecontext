@@ -11,8 +11,7 @@ const InputGroup = ({ state, setState, field }) => {
         type="text"
         name={`note${field}`}
         id={`note${field}`}
-        className="block shadow-inner w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 text-base "
-        //shadow-inner-[0_2px_4px_0px_rgba(47,55,61,0.25)]
+        className="block shadow-inner w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 text-base"
         placeholder={`Note ${field}`}
         value={state}
         onChange={(e) => {

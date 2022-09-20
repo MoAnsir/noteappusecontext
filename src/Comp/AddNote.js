@@ -16,10 +16,6 @@ const AddNote = () => {
   //   Boolean(desc) && Boolean(note) && Boolean(tags) ? "enable" : "disable";
   // const enableButton = Boolean(desc) && Boolean(note) && Boolean(tags);
   const enableButton = !!desc && !!note && !!tags; //return as boolean value
-  console.log(
-    "🚀 ~ file: AddNote.js ~ line 15 ~ AddNote ~ enableButton",
-    enableButton
-  );
 
   const handleAddNote = (e) => {
     e.preventDefault();

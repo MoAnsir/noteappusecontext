@@ -8,10 +8,23 @@ import "./CSS/App.css";
 // add local storage
 // do jest tests
 // do cypress tests
-// fix design - cards for the notes
 
-const App = () => {
-  const [noteState, setNoteState] = useState();
+const App = ({ testData }) => {
+  const [noteState, setNoteState] = useState(testData ? testData : null);
+
+  useEffect(() => {
+    if (!testData) {
+      get("test").then((val) => {
+        setNoteState(val);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (noteState) {
+      set("test", noteState);
+    }
+  }, [noteState]);
 
   return (
     <AppContext.Provider value={{ noteState, setNoteState }}>
@@ -20,7 +33,6 @@ const App = () => {
           Note App
         </h1>
         <AddNote />
-        {/* {noteState ? <ListNotes /> : "No notes"}*/}
         <ListNotes />
       </div>
     </AppContext.Provider>
