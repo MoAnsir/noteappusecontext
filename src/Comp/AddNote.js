@@ -11,8 +11,10 @@ const AddNote = () => {
   const [note, setNote] = useState("");
   const [tags, setTags] = useState("");
 
-  const enableButton =
-    Boolean(desc) && Boolean(note) && Boolean(tags) ? "enable" : "disable";
+  // const enableButton =
+  //   Boolean(desc) && Boolean(note) && Boolean(tags) ? "enable" : "disable";
+  // const enableButton = Boolean(desc) && Boolean(note) && Boolean(tags);
+  const enableButton = !!desc && !!note && !!tags; //return as boolean value
   console.log(
     "🚀 ~ file: AddNote.js ~ line 15 ~ AddNote ~ enableButton",
     enableButton
@@ -44,27 +46,6 @@ const AddNote = () => {
       ]);
     }
 
-    // if (!noteState) {
-    //   setNoteState([
-    //     {
-    //       id: uuidv4(),
-    //       desc,
-    //       note,
-    //       tags,
-    //     },
-    //   ]);
-    // } else {
-    //   setNoteState((prev) => [
-    //     ...prev,
-    //     {
-    //       id: uuidv4(),
-    //       desc,
-    //       note,
-    //       tags,
-    //     },
-    //   ]);
-    // }
-
     setDesc("");
     setNote("");
     setTags("");
@@ -79,8 +60,9 @@ const AddNote = () => {
           <NoteContent note={note} setNote={setNote} />
           <NoteTags tags={tags} setTags={setTags} />
         </div>
+
         <button
-          {(enableButton === "disabled") ? "disabled" : "disabled"}
+          disabled={!enableButton}
           className="bg-blue-500 text-white text-base px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
           value="submit"
