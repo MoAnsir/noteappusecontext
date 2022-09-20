@@ -41,25 +41,38 @@ const ListNote = () => {
         <p>No Note's</p>
       ) : (
         <div className="mt-10">
-          <h1 className="text-center">List Note</h1>
-          <ul className="flex">
+          {/* <h1 className="text-center mb-5">List Note</h1> */}
+          <ul className="block md:flex md:flex-wrap md:justify-evenly">
             {noteState.length
               ? noteState.map((note, index) => (
-                  <li key={note.id} className="w-1/4">
+                  <li
+                    key={note.id}
+                    className="w-full md:w-1/4 shadow-lg mr-5 mb-10 bg-white rounded-lg p-5"
+                  >
                     <div
                       className="note-content"
                       onClick={() => handleShowModal(note.id)}
                     >
-                      <p>description: {note.desc}</p>
-                      <p>content: {note.note}</p>
-                      <p>tags: {note.tags}</p>
+                      <p className="text-center">{note.desc}</p>
+                      <p className="text-center">{note.note}</p>
+                      <p className="text-center">{note.tags}</p>
                     </div>
-                    <button type="button" onClick={() => handleEdit(note.id)}>
-                      Edit
-                    </button>
-                    <button type="button" onClick={() => handleDelete(note.id)}>
-                      Delete
-                    </button>
+                    <div className="text-center">
+                      <button
+                        className="mt-4 bg-gray-500 text-white text-base px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => handleEdit(note.id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="mt-4 bg-red-500 text-white text-base px-3 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={() => handleDelete(note.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </li>
                 ))
               : null}

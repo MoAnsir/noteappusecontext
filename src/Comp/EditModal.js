@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useContext } from "react";
 import { AppContext } from "../JS/AppContext";
+import InputGroup from "./InputGroup";
 import NoteDesc from "./NoteDesc";
 import NoteContent from "./NoteContent";
 import NoteTags from "./NoteTags";
@@ -72,20 +73,19 @@ const EditModal = ({ isOpen, setIsOpen, noteId }) => {
                     Edit Note
                   </Dialog.Title>
 
-                  <div className="modal-content mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                    <NoteDesc desc={desc} setDesc={setDesc} />
+                  <div className="modal-content mt-2 text-center">
+                    <InputGroup state={desc} setState={setDesc} field="desc" />
+                    <InputGroup state={note} setState={setNote} field="note" />
+                    <InputGroup state={tags} setState={setTags} field="tags" />
+                    {/* <NoteDesc desc={desc} setDesc={setDesc} />
                     <NoteContent note={note} setNote={setNote} />
-                    <NoteTags tags={tags} setTags={setTags} />
+                    <NoteTags tags={tags} setTags={setTags} /> */}
                   </div>
 
                   <div className="modal-footer mt-4 float-right">
                     <button
                       type="button"
-                      className="mr-4 inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                      className="mr-4 inline-flex justify-center rounded-md border border-transparent bg-gray-500 px-3 py-1 text-sm font-medium text-gray-900 hover:bg-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
                       onClick={() => {
                         setIsOpen(!isOpen);
                         setDesc("");
@@ -97,7 +97,7 @@ const EditModal = ({ isOpen, setIsOpen, noteId }) => {
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-green-500 px-3 py-1 text-sm font-medium text-green-900 hover:bg-green-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                       onClick={(e) => handleSave(e)}
                     >
                       Save

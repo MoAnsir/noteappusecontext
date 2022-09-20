@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <AppContext.Provider value={{ noteState, setNoteState }}>
-      <div className="container  w-screen h-screen mx-auto bg-gray-200 rounded-xl shadow border p-8">
+      <div className="container  w-full h-full mx-auto bg-gray-200 rounded-xl shadow border p-8">
         <h1 className="text-center text-6xl font-normal leading-normal mt-0 mb-2">
           Note App
         </h1>
