@@ -2,7 +2,7 @@ const InputGroup = ({ state, setState, field }) => {
   return (
     <div className={`note-${field} my-4 mx-2`}>
       <label
-        htmlFor="price"
+        htmlFor={`note${field}`}
         className="block text-base w-full text-gray-700 mb-2"
       >
         Note {field}

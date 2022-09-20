@@ -38,9 +38,9 @@ const ListNote = () => {
   return (
     <>
       {!noteState ? (
-        <p>No Note's</p>
+        <p data-testid="no-notes">No Note's</p>
       ) : (
-        <div className="mt-10">
+        <div className="mt-10" data-testid="main-notes">
           {/* <h1 className="text-center mb-5">List Note</h1> */}
           <ul className="block md:flex md:flex-wrap md:justify-evenly">
             {noteState.length

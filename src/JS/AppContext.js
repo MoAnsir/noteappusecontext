@@ -2,8 +2,8 @@ import React from "react";
 
 export const initialData = {
   id: 0,
-  description: "test",
-  content: "test",
+  desc: "test",
+  note: "test",
   tags: "test",
 };
 
