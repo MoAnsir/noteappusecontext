@@ -1,12 +1,7 @@
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import "fake-indexeddb/auto";
+import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
 import App from "../App";
-
-// test("renders learn react link", () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
 
 afterAll(cleanup);
 
@@ -27,12 +22,12 @@ const testData = [
 
 describe("test note app renders", () => {
   afterEach(cleanup);
-  it("should render the header", () => {
+  it("Should render the header", () => {
     render(<App />);
     const mainTitle = screen.getByText(/Note App/i);
     expect(mainTitle).toBeInTheDocument();
   });
-  it("should render add note component", () => {
+  it("Should render add note component", () => {
     render(<App />);
     const mainDesc = screen.getByLabelText(/Note Desc/i);
     const mainNote = screen.getByLabelText(/Note note/i);
@@ -41,42 +36,43 @@ describe("test note app renders", () => {
     expect(mainNote).toBeInTheDocument();
     expect(mainTags).toBeInTheDocument();
   });
-  it("should render the list component with no notes", () => {
+  it("Should render the list component with no notes", () => {
     render(<App />);
     const mainNotes = screen.getByTestId("no-notes");
     expect(mainNotes).toBeInTheDocument();
   });
-  it("should render the list component", () => {
+  it("Should render the list component", () => {
     render(<App testData={testData} />);
     const mainNotes = screen.getByTestId("main-notes");
     expect(mainNotes).toBeInTheDocument();
   });
-  it("should render the list component with notes", () => {
+  it("Should render the list component with notes", () => {
     render(<App testData={testData} />);
     const allNotetitles = screen.getAllByText(/test title/i);
     expect(allNotetitles).toHaveLength(2);
   });
   //May be a view port issue observer. react-intersection-observer
-  // it("should render the edit modal", () => {
-  //   render(<App testData={testData} />);
-  //   const editButton = screen.getAllByRole("button", { name: /Edit/i });
-  //   expect(editButton).toHaveLength(2);
-  //   fireEvent.click(editButton[0]);
-  //   const editModal = screen.getByTestId("edit-modal");
-  //   expect(editModal).toBeInTheDocument();
-  // });
+  it("Should render the edit modal", () => {
+    render(<App testData={testData} />);
+    const editButton = screen.getAllByRole("button", { name: /Edit/i });
+    expect(editButton).toHaveLength(2);
+    mockAllIsIntersecting(true);
+    fireEvent.click(editButton[0]);
+    const editModal = screen.getByTestId("edit-modal");
+    expect(editModal).toBeInTheDocument();
+  });
 });
 
 describe("test the app can do crud functions", () => {
   afterEach(cleanup);
-  it("It should read a note", () => {
+  it("Should read a note", () => {
     render(<App testData={testData} />);
     const allNotesTitle = screen.getAllByText(/test title/i);
     const allNotesContent = screen.getAllByText(/test content/i);
     expect(allNotesTitle).toHaveLength(2);
     expect(allNotesContent).toHaveLength(2);
   });
-  it("It should add a note", () => {
+  it("Should add a note", () => {
     render(<App testData={testData} />);
 
     const desc = screen.getByPlaceholderText("Note desc");
@@ -97,10 +93,33 @@ describe("test the app can do crud functions", () => {
     expect(screen.getByText(/manual test note 1/i)).toBeInTheDocument();
   });
   //react-intersection-observer
-  it("It should edit a note", () => {
+  it("Should edit a note", () => {
     render(<App testData={testData} />);
+    const editButton = screen.getAllByRole("button", { name: /Edit/i });
+    expect(editButton).toHaveLength(2);
+    mockAllIsIntersecting(true);
+    fireEvent.click(editButton[0]);
+    const editModal = screen.getByTestId("edit-modal");
+    expect(editModal).toBeInTheDocument();
+
+    const desc = screen.getAllByPlaceholderText("Note desc");
+    const note = screen.getAllByPlaceholderText("Note note");
+    const tag = screen.getAllByPlaceholderText("Note tags");
+    const but = screen.getByRole("button", { name: /Save/i });
+
+    fireEvent.change(desc[1], { target: { value: "manual test Edit desc 1" } });
+    fireEvent.change(note[1], { target: { value: "manual test Edit note 1" } });
+    fireEvent.change(tag[1], { target: { value: "manual test Edit, tag1" } });
+
+    expect(desc[1].value).toBe("manual test Edit desc 1");
+    expect(note[1].value).toBe("manual test Edit note 1");
+    expect(tag[1].value).toBe("manual test Edit, tag1");
+
+    fireEvent.click(but);
+    expect(screen.getByText(/manual test Edit desc 1/i)).toBeInTheDocument();
+    expect(screen.getByText(/manual test Edit note 1/i)).toBeInTheDocument();
   });
-  it("It should delete a note", () => {
+  it("Should delete a note", () => {
     render(<App testData={testData} />);
     const allNotesTitle = screen.getAllByText(/test title/i);
     const allNotesContent = screen.getAllByText(/test content/i);

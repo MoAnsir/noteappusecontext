@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 import { get, set } from "idb-keyval";
 import "./CSS/App.css";
 // TODO:
-// add local storage
-// do jest tests
 // do cypress tests
 
 const App = ({ testData }) => {

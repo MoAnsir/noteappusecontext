@@ -2,9 +2,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useContext } from "react";
 import { AppContext } from "../JS/AppContext";
 import InputGroup from "./InputGroup";
-import NoteDesc from "./NoteDesc";
-import NoteContent from "./NoteContent";
-import NoteTags from "./NoteTags";
 
 const EditModal = ({ isOpen, setIsOpen, noteId }) => {
   const { noteState, setNoteState } = useContext(AppContext);
@@ -80,9 +77,6 @@ const EditModal = ({ isOpen, setIsOpen, noteId }) => {
                     <InputGroup state={desc} setState={setDesc} field="desc" />
                     <InputGroup state={note} setState={setNote} field="note" />
                     <InputGroup state={tags} setState={setTags} field="tags" />
-                    {/* <NoteDesc desc={desc} setDesc={setDesc} />
-                    <NoteContent note={note} setNote={setNote} />
-                    <NoteTags tags={tags} setTags={setTags} /> */}
                   </div>
 
                   <div className="modal-footer mt-4 float-right">

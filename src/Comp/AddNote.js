@@ -2,9 +2,6 @@ import { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AppContext } from "../JS/AppContext";
 import InputGroup from "./InputGroup";
-import NoteDesc from "./NoteDesc";
-import NoteContent from "./NoteContent";
-import NoteTags from "./NoteTags";
 
 const AddNote = () => {
   const { noteState, setNoteState } = useContext(AppContext);
@@ -56,9 +53,6 @@ const AddNote = () => {
           <InputGroup state={desc} setState={setDesc} field="desc" />
           <InputGroup state={note} setState={setNote} field="note" />
           <InputGroup state={tags} setState={setTags} field="tags" />
-          {/* <NoteDesc desc={desc} setDesc={setDesc} />
-          <NoteContent note={note} setNote={setNote} />
-          <NoteTags tags={tags} setTags={setTags} /> */}
         </div>
         <button
           disabled={!enableButton}
