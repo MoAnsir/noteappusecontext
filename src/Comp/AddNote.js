@@ -46,7 +46,7 @@ const AddNote = () => {
   };
 
   return (
-    <div className="add-note text-center mt-10">
+    <div className="add-note text-center mt-10" data-testid="add-note">
       {/* <h2 className="text-center">Add Note</h2> */}
       <form>
         <div className="block md:flex justify-center">

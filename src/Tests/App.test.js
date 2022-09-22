@@ -131,4 +131,14 @@ describe("test the app can do crud functions", () => {
     expect(screen.queryByText(/test title 1/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/test content 1/i)).not.toBeInTheDocument();
   });
+  it("should open a note in a modal when clicked", () => {
+    render(<App testData={testData} />);
+    const allNotesTitle = screen.getAllByText(/test title/i);
+    const allNotesContent = screen.getAllByText(/test content/i);
+    expect(allNotesTitle).toHaveLength(2);
+    expect(allNotesContent).toHaveLength(2);
+    fireEvent.click(allNotesContent[0]);
+    const showModal = screen.getByTestId("show-modal");
+    expect(showModal).toBeInTheDocument();
+  });
 });
