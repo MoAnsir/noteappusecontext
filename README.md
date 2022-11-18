@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Note app useContext
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The aim for this project was to create a note taking app that saves data to IndexDB on the users machine so they can come back to the app and the data will persist. React useContext was used for state. 
+Tailwind was used for the CSS and headless UI as a component library.
+Jest and Cypress were used for testing
+<br />
+<img src="./public/main.PNG" width="350">
 
-## Available Scripts
+## Technologies
+* React 18.2.0
+* tailwindcss 3.1.8
+* headlessui/react 1.7.2
+* idb-keyval 6.2.0
+* Cypress 10.4.0
+* testing-library/react 13.4.0
 
-In the project directory, you can run:
+<br />
+<br />
+## Installation
+First, run the development server:
 
-### `npm start`
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+<br />
+<br />
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To add a note you have 3 input boxes. one for the note description, note name and tags. After filling out the form click the "Add note" button
+<br />
+<img src="./public/add.PNG" width="350">
+<br />
+<br />
+The added note will show in the list view below
+<br />
+<img src="./public/list.PNG" width="350">
+<br />
+<br />
+You can edit a note by click the "Edit" button in the list view. A modal will open. you can change the description, note and the tags. you can save your change or close the modal without saving. 
+<br />
+<img src="./public/edit.PNG" width="350">
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
